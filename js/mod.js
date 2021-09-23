@@ -1,8 +1,8 @@
 let modInfo = {
 	name: "The Wishing Tree",
 	id: "73456",
-	author: "nobody",
-	pointsName: "points",
+	author: "Down the Dragon's Gate",
+	pointsName: "folds",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
@@ -42,7 +42,12 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(1)
+	let gain = new Decimal(0)
+	//if (hasUpgrade('p', 11)) gain = gain.times(2)
+	if (hasUpgrade('p', 11)) gain = gain.plus(1)
+	if (hasUpgrade('p', 12)) gain = gain.times(2)
+	if (hasUpgrade('p', 13)) gain = gain.times(upgradeEffect('p', 13))
+	if (hasUpgrade('p', 14)) gain = gain.times(upgradeEffect('p', 14))
 	return gain
 }
 
